@@ -1,0 +1,2 @@
+https://www.kaggle.com/datasets/tolgadincer/labeled-chest-xray-images
+https://www.kaggle.com/datasets/techsash/waste-classification-data

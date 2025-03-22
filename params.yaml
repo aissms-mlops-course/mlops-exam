@@ -1,0 +1,45 @@
+base:
+  project: mlops-endsem
+
+raw_data:
+  data_src: data_source
+
+load_data:
+  num_classes: 4
+  raw_data: data_source
+  preprocessed_data: data/processed
+  full_path: deep_learning/data_source
+
+train:
+  split_ratio: 0.80
+  
+model:
+  name: CNN
+  trainable: True
+  train_path: data/processed/train
+  test_path: data/processed/test
+  image_size: [255, 255]
+  loss: "categorical_crossentropy"
+  optimizer: "adam"
+  metrics: ["accuracy"]
+  epochs: 3
+  batch_size: 32
+  sav_dir: models/trained.h5
+
+img_augment:
+  rescale: 0.003921
+  shear_range: 0.2
+  zoom_range: 0.2
+  horizontal_flip: True
+  vertical_flip: True
+  batch_size: 32
+  class_mode: "categorical"
+
+model_dir: models
+
+mlflow_config:
+  artifact_dir: artifacts
+  experiment_name: mlops-endsem
+  run_name: mlops
+  registered_model_name: Chest_Xray_model
+  remote_server_uri: http://127.0.0.1:5000
