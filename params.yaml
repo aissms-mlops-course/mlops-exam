@@ -2,13 +2,13 @@ base:
   project: mlops-endsem
 
 raw_data:
-  data_src: data_source
+  data_src: chest_xray
 
 load_data:
-  num_classes: 4
-  raw_data: data_source
+  num_classes: 2
+  raw_data: chest_xray
   preprocessed_data: data/processed
-  full_path: deep_learning/data_source
+  full_path: mlops-endsem/data_source
 
 train:
   split_ratio: 0.80
