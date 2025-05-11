@@ -78,8 +78,8 @@ def download_report(pred_class, confidence):
 
 # Streamlit UI
 st.set_page_config(page_title="Pneumonia Detection", layout="wide")
-st.sidebar.title("Upload Chest X-Ray Image")
-uploaded_file = st.sidebar.file_uploader("Choose an X-ray image", type=["png", "jpg", "jpeg"])
+st.sidebar.title("Upload Chest X-Ray Picture")
+uploaded_file = st.sidebar.file_uploader("Select an X-ray image", type=["png", "jpg", "jpeg"])
 
 if uploaded_file:
     image = Image.open(uploaded_file)
