@@ -33,6 +33,26 @@
 
 #       - name: Run tests
 #         run: pytest
+#    - name: Docker Build and Push to Docker Hub
+#         run: |
+#           docker build -t docker-image .
+#           docker tag mlops-exam docker-image
+#           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+#           docker push docker-image //
+#         env:
+#           DOCKER_CLI_ACI: 1
+
+#       - name: Run Trivy vulnerability scanner in fs mode
+#         uses: aquasecurity/trivy-action@0.28.0
+#         with:
+#             scan-type: 'fs'
+#             scan-ref: '.'
+#             trivy-config: trivy.yaml
+
+#       - name: Trivy File Scan
+#         run : |
+#             trivy fs . > trivy_scan.txt
+#             trivy image docker-image:latest > trivy_image_scan.txt
 
 #       - name: Run Streamlit app (headless check)
 #         run: |
