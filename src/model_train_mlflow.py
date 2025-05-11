@@ -1,7 +1,7 @@
 import numpy as np
 from keras_preprocessing.image import ImageDataGenerator
 from tensorflow.keras.models import Model
-from tensorflow.keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
+from keras.layers import Dense, Flatten, Conv2D, MaxPooling2D
 import os
 import argparse
 from get_data import get_data, read_params
