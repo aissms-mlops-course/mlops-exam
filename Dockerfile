@@ -26,7 +26,7 @@ RUN pip install -r requirements.txt
 
 # Copy app code
 COPY . .
-COPY ../models/trained.h5
+COPY ../models/trained.h5 .
 
 # Expose Streamlit default port
 EXPOSE 8501
