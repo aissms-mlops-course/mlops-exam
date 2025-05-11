@@ -12,3 +12,4 @@ keras_preprocessing
 mlflow
 h5py
 opencv-python
+matplotlib

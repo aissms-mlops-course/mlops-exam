@@ -24,8 +24,12 @@ def preprocess_image(image):
     return image
 
 
+from PIL import Image
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Model
+
 def generate_gradcam(image_tensor, model, layer_name="block5_conv3"):
-    """ Generate Grad-CAM Visualization """
     grad_model = Model(
         inputs=[model.input],
         outputs=[model.get_layer(layer_name).output, model.output]
@@ -46,15 +50,21 @@ def generate_gradcam(image_tensor, model, layer_name="block5_conv3"):
         conv_outputs[:, :, i] *= pooled_grads[i]
 
     heatmap = np.mean(conv_outputs, axis=-1)
-    heatmap = np.maximum(heatmap, 0)  # ReLU
-    heatmap /= np.max(heatmap)  # Normalize
+    heatmap = np.maximum(heatmap, 0)
+    heatmap /= np.max(heatmap)
 
-    heatmap = cv2.resize(heatmap, (255, 255))
-    heatmap = np.uint8(255 * heatmap)
-    heatmap = cv2.applyColorMap(heatmap, cv2.COLORMAP_JET)
+    # Resize heatmap using PIL
+    heatmap = Image.fromarray(np.uint8(255 * heatmap)).resize((255, 255), resample=Image.BILINEAR)
+    heatmap = np.array(heatmap)
 
-    # Convert heatmap to PIL image
-    return Image.fromarray(heatmap)
+    # Apply colormap using matplotlib
+    import matplotlib.cm as cm
+    colormap = cm.get_cmap('jet')
+    heatmap_colored = colormap(heatmap / 255.0)  # returns RGBA
+    heatmap_colored = np.uint8(255 * heatmap_colored[:, :, :3])  # Drop alpha
+
+    return heatmap_colored
+
 
 def download_report(pred_class, confidence):
     report_text = f""" 
