@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: streamlit-app
-    env: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: streamlit run webapp/pages/mlops-endsem.py
