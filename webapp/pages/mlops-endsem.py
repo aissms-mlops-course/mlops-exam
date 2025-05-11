@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import tensorflow as tf
-import cv2
 import base64
 from tensorflow.keras.models import load_model, Model
 from tensorflow.keras.preprocessing.image import img_to_array
