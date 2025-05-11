@@ -18,11 +18,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements file
-COPY req_prod.txt .
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip
-RUN pip install -r req_prod.txt
+RUN pip install -r requirements.txt
 
 # Copy app code
 COPY . .
