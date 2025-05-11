@@ -5,8 +5,8 @@ FROM python:3.9-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Set work directory
-WORKDIR /webapp/pages/
+# Set working directory inside the container
+WORKDIR /webapp/pages
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -17,16 +17,16 @@ RUN apt-get update && apt-get install -y \
     libxrender-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
-COPY requirements.txt .
+# Copy requirements.txt into /webapp
+COPY requirements.txt /webapp/
 
 # Install Python dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r /webapp/requirements.txt
 
 # Copy app code
-COPY . .
-COPY ../models/trained.h5 .
+COPY webapp/pages/mlops-endsem.py /webapp/pages/
+COPY models/trained.h5 /webapp/pages/models/
 
 # Expose Streamlit default port
 EXPOSE 8501
