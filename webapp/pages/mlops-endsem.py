@@ -83,7 +83,7 @@ uploaded_file = st.sidebar.file_uploader("Choose an X-ray image", type=["png", "
 
 if uploaded_file:
     image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Chest X-Ray", use_column_width=True)
+    st.image(image, caption="Uploaded Chest X-Ray")
     
     if st.button("Classify Image"):
         input_tensor = preprocess_image(image)
@@ -98,6 +98,6 @@ if uploaded_file:
             st.info(f"Confidence: {confidence:.2f}%")
         with col2:
             gradcam_image = generate_gradcam(input_tensor, model)
-            st.image(gradcam_image, caption="Grad-CAM Visualization", use_column_width=True)
+            st.image(gradcam_image, caption="Grad-CAM Visualization")
         
         st.markdown(download_report(pred_class, confidence), unsafe_allow_html=True)
