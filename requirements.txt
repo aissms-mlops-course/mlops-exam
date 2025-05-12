@@ -3,4 +3,3 @@ tensorflow
 streamlit
 matplotlib
 pillow
-psutil

@@ -6,8 +6,6 @@ from tensorflow.keras.models import load_model, Model
 from tensorflow.keras.preprocessing.image import img_to_array
 from tensorflow.keras import models
 from PIL import Image
-import psutil
-import matplotlib.pyplot as plt
 
 # Load the trained model
 MODEL_PATH = "models/trained.h5"
@@ -56,7 +54,7 @@ def generate_gradcam(image_tensor, model, layer_name="block5_conv3"):
 
     # Apply colormap using matplotlib
     import matplotlib.cm as cm
-    colormap = plt.colormaps['jet']
+    colormap = cm.get_cmap('jet')
     heatmap_colored = colormap(heatmap / 255.0)  # returns RGBA
     heatmap_colored = np.uint8(255 * heatmap_colored[:, :, :3])  # Drop alpha
 
@@ -99,5 +97,4 @@ if uploaded_file:
             st.image(gradcam_image, caption="Grad-CAM Visualization")
         
         st.markdown(download_report(pred_class, confidence), unsafe_allow_html=True)
-        st.write(f"Memory used: {psutil.Process().memory_info().rss / 1024 ** 2:.2f} MB")
 
